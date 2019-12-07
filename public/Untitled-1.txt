@@ -1,0 +1,8 @@
+fKFSbZqvMybGPwvwcna8wjVKM3GxMO4YLg5F0L5c
+You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
+
+https://api.nasa.gov/planetary/apod?api_key=fKFSbZqvMybGPwvwcna8wjVKM3GxMO4YLg5F0L5c
+For additional support, please contact us. When contacting us, please tell us what API you're accessing and provide the following account details so we can quickly find you:
+
+Account Email: itsliku@gmail.com
+Account ID: 9de1727b-b60a-4956-8f7c-e02b3def63e2
