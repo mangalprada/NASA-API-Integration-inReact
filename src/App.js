@@ -1,55 +1,153 @@
 import React from 'react';
 import axios from 'axios';
-import ImageDisplay from './ImageDisplay';
+import './App.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { imageData: '', date: new Date() };
+    this.state = {
+      imageData: '',
+      date: new Date()
+        .toJSON()
+        .slice(0, 10)
+        .replace(/-/g, '-'),
+      type: '',
+      loader: true
+    };
   }
 
-  changeDate = num => {
-    let d = this.state.date;
-    d.setDate(d.getDate() + num);
-    console.log(this.state);
-    this.setState({ ...this.state, date: d });
-    console.log(this.state);
+  checkDate = date => {
+    var d = new Date()
+      .toJSON()
+      .slice(0, 10)
+      .replace(/-/g, '-');
+
+    return date === d;
   };
 
-  formatDate = date => {
-    var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+  handleChange = d => {
+    this.setState(
+      {
+        date: d
+          .toJSON()
+          .slice(0, 10)
+          .replace(/-/g, '-'),
+        loader: true
+      },
+      () => {
+        this.loadImage();
+      }
+    );
+  };
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
+  changeDate = num => {
+    let d = new Date(this.state.date);
+    d.setDate(d.getDate() + num);
+    this.setState(
+      {
+        date: d
+          .toJSON()
+          .slice(0, 10)
+          .replace(/-/g, '-'),
+        loader: true
+      },
+      () => {
+        this.loadImage();
+      }
+    );
   };
 
   loadImage = async () => {
     const response = await axios.get('https://api.nasa.gov/planetary/apod', {
       params: {
-        date: this.formatDate(this.state.date),
+        date: this.state.date,
         hd: 'False',
-        api_key: 'fKFSbZqvMybGPwvwcna8wjVKM3GxMO4YLg5F0L5c'
+        api_key: 'dYaN5pHy9g41RteCu4RGy8x6dTkOrpIjb9DtpZXm'
       }
     });
-    this.setState({ ...this.state, imageData: response.data });
+
+    this.setState({
+      imageData: response.data,
+      type: response.data.media_type,
+      loader: false
+    });
   };
 
   componentDidMount() {
-    this.loadImage();
-  }
-  componentWillUpdate() {
     this.loadImage();
   }
 
   render() {
     return (
       <div>
-        <ImageDisplay data={this.state.imageData} func={this.changeDate} />
+        <nav class="navbar navbar-dark bg-primary">
+          <span class="navbar-brand mb-0 h1">Astronomy Picture of the Day</span>
+        </nav>
+        <div className="container " style={{ width: '60rem' }}>
+          <h6 className="text-center">
+            Go To Any Past Date{'   '}
+            <DatePicker
+              id="dp"
+              selected={new Date(this.state.date)}
+              onChange={this.handleChange}
+            />
+          </h6>
+
+          {this.state.loader ? (
+            <div class="loader"></div>
+          ) : (
+            <div className="row">
+              <h4>{this.state.imageData.title}</h4>
+              {this.state.type === 'image' ? (
+                <img
+                  id="img"
+                  src={this.state.imageData.url}
+                  className="img-fluid"
+                  alt="..."
+                />
+              ) : (
+                <div className="embed-responsive embed-responsive-16by9">
+                  <iframe
+                    className="embed-responsive-item"
+                    src={this.state.imageData.url}
+                    allowfullscreen
+                  />
+                </div>
+              )}
+
+              <h5>Picture Descrpiption</h5>
+              <p>{this.state.imageData.explanation}</p>
+            </div>
+          )}
+        </div>
+
+        <div className="buttn">
+          <div id="prev" onClick={() => this.changeDate(-1)}>
+            Previous Day
+          </div>
+          <div
+            id="next"
+            disabled={this.checkDate(this.state.date)}
+            onClick={() => this.changeDate(1)}
+          >
+            Next Day
+          </div>
+        </div>
+        <div class="footer text-center">
+          <p>
+            Made by{' '}
+            <a href="https://www.linkedin.com/in/mangalprada-malaya-72930812a/">
+              Mangalprada Malaya
+            </a>
+            . Get the source code from{' '}
+            <a href="https://www.linkedin.com/in/mangalprada-malaya-72930812a/">
+              here
+            </a>
+            .
+          </p>
+        </div>
       </div>
     );
   }
