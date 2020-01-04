@@ -83,7 +83,9 @@ class App extends React.Component {
     return (
       <div>
         <nav class="navbar navbar-dark bg-primary">
-          <span class="navbar-brand mb-0 h1">Astronomy Picture of the Day</span>
+          <span class="navbar-brand  mb-0 h1">
+            Astronomy Picture of the Day
+          </span>
         </nav>
         <div className="container " style={{ width: '60rem' }}>
           <h6 className="text-center">
@@ -142,10 +144,7 @@ class App extends React.Component {
               Mangalprada Malaya
             </a>
             . Get the source code from{' '}
-            <a href="https://www.linkedin.com/in/mangalprada-malaya-72930812a/">
-              here
-            </a>
-            .
+            <a href="https://github.com/mmalay">here</a>.
           </p>
         </div>
       </div>

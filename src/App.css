@@ -14,7 +14,6 @@ iframe {
   border: 2px solid #5edfff;
   border-radius: 3px;
   width: 90px;
-  maxdate: 0;
 }
 h4 {
   margin: 10px;
@@ -48,7 +47,7 @@ p {
 
 #prev {
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 20px;
   border-radius: 6px;
   color: #3e64ff;
@@ -59,7 +58,7 @@ p {
 }
 #next {
   position: fixed;
-  top: 50%;
+  top: 40%;
   right: 20px;
   color: #3e64ff;
   border: 2px solid #5edfff;
@@ -107,6 +106,6 @@ p {
 .footer {
   background: #b2fcff;
   margin-top: 10px;
-  bottom: 0;
+  bottom: 0%;
   padding: 10px;
 }
