@@ -140,11 +140,17 @@ class App extends React.Component {
         <div class="footer text-center">
           <p>
             Made by{' '}
-            <a href="https://www.linkedin.com/in/mangalprada-malaya-72930812a/">
+            <a
+              href="https://www.linkedin.com/in/mangalprada-malaya-72930812a/"
+              target="_blank"
+            >
               Mangalprada Malaya
             </a>
             . Get the source code from{' '}
-            <a href="https://github.com/mmalay/NASA-API-Integration-inReact">
+            <a
+              href="https://github.com/mmalay/NASA-API-Integration-inReact"
+              target="_blank"
+            >
               here
             </a>
             .
