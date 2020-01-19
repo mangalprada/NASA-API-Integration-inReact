@@ -144,7 +144,10 @@ class App extends React.Component {
               Mangalprada Malaya
             </a>
             . Get the source code from{' '}
-            <a href="https://github.com/mmalay">here</a>.
+            <a href="https://github.com/mmalay/NASA-API-Integration-inReact">
+              here
+            </a>
+            .
           </p>
         </div>
       </div>
